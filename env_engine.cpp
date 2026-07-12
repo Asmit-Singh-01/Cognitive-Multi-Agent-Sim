@@ -40,3 +40,18 @@ int main() {
     FastEnvEngine engine(10, 2, 3);
     return 0;
 }
+
+
+
+
+#include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
+
+namespace py = pybind11;
+
+// Python me module ka naam 'fast_env' ban jayega
+PYBIND11_MODULE(fast_env, m) {
+    py::class_<FastEnvEngine>(m, "FastEnvEngine")
+        .def(py::init<int, int, int>())
+        .def("step", &FastEnvEngine::step);
+}
