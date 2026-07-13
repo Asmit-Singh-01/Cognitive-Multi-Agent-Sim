@@ -1,5 +1,5 @@
 import numpy as np
-import requests  # Go server se baat karne ke liye
+import requests  # Go server se baat karne ke liye.
 from environment import CognitiveMultiAgentEnv
 from dqn_agent import MultiAgentDQN
 from cognitive_logic import CognitiveProcessor
