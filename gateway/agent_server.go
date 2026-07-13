@@ -21,7 +21,7 @@ var (
 	mutex      sync.Mutex
 )
 
-// updateState handles incoming data from the Python/C++ engine
+// updateState handles incoming data from the Python/C++ engine 
 func updateState(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
 		http.Error(w, "Only POST allowed", http.StatusMethodNotAllowed)
