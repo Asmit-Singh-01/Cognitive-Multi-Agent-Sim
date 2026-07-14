@@ -32,6 +32,18 @@ This repository implements a highly optimized, production-grade hybrid ecosystem
 - **C++ Engine** ⚙️ (High-performance environment compilation linked via `pybind11` for maximum execution speed)
 - **Go / Golang Gateway** 🐹 (Asynchronous, high-throughput network service for streaming and logging real-time agent telemetry)
 
+## 📊 Live Performance Dashboard & Analytics
+When running the optimization scripts, the multi-language backend dynamically records telemetry to track learning efficiency and constraint handling.
+
+### 1. Multi-Agent Reward Convergence Curve
+Shows how both agents successfully coordinate paths to maximize resource collection over time.
+![Reward Convergence](rewards_convergence.png)
+
+### 2. Collision Optimization Matrix
+Demonstrates the sharp decline in physical agent collisions as the neural network adjusts safety constraints.
+![Collision Rate](collision_rate.png)
+
+
 ## 🚧 Current Status
 * **Hybrid Core:** Completed! The Python training architecture, C++ physics layer, and Go telemetry gateway are fully integrated.
 * **CI/CD Pipeline:** Automated integration testing via GitHub Actions is live (ensuring every commit maintains structural integrity).
