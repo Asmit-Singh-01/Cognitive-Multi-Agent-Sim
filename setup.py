@@ -1,21 +1,30 @@
 from setuptools import setup, Extension
-import pybind11
+import sys
 
-# Hum C++ extension define kar rahe hain
+# Pybind11 setup integration
+try:
+    import pybind11
+except ImportError:
+    # Agar compilation ke waqt pybind11 na ho toh errors avoid karne ke liye
+    pass
+
 ext_modules = [
     Extension(
-        'fast_env', # Ye Python module ka naam hoga
-        ['env_engine.cpp'],
-        include_dirs=[pybind11.get_include()],
-        language='c++',
-        extra_compile_args=['-std=c++11', '-O3'] # -O3 extreme speed optimization ke liye hai
+        'physics_core',
+        ['bindings.cpp'],
+        include_dirs=[
+            # Path to pybind11 headers
+            pybind11.get_include() if 'pybind11' in sys.modules else ""
+        ],
+        language='c++'
     ),
 ]
 
 setup(
-    name='CognitiveSimEngine',
-    version='0.1.0',
-    description='High-speed C++ engine for Multi-Agent RL',
+    name='physics_core',
+    version='0.1',
+    author='Asmit Singh',
+    description='C++ Physics Core Engine bindings for Cognitive-Multi-Agent-Sim',
     ext_modules=ext_modules,
+    zip_safe=False,
 )
-
