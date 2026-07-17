@@ -5,58 +5,43 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"sync"
 )
 
-// AgentState defines the data we track for cognitive analysis
-type AgentState struct {
-	AgentID   int       `json:"agent_id"`
-	Position  []float64 `json:"position"`
-	Action    int       `json:"action"`
-	Cognitive float64   `json:"cognitive_bias_level"`
+// TelemetryData defines the structure of incoming simulation metrics from Python
+type TelemetryData struct {
+	Step      int     `json:"step"`
+	AgentID   int     `json:"agent_id"`
+	Energy    float64 `json:"energy"`
+	Strategy  string  `json:"strategy"`
+	XPosition float64 `json:"x"`
+	YPosition float64 `json:"y"`
 }
 
-var (
-	stateStore = make(map[int]AgentState)
-	mutex      sync.Mutex
-)
-
-// updateState handles incoming data from the Python/C++ engine 
-func updateState(w http.ResponseWriter, r *http.Request) {
+func telemetryHandler(w http.ResponseWriter, r *http.Request) {
+	// Hume sirf POST requests chahiye kyunki Python data bhejega
 	if r.Method != http.MethodPost {
-		http.Error(w, "Only POST allowed", http.StatusMethodNotAllowed)
+		http.Error(w, "Only POST requests are allowed", http.StatusMethodNotAllowed)
 		return
 	}
 
-	var state AgentState
-	err := json.NewDecoder(r.Body).Decode(&state)
+	var data TelemetryData
+	err := json.NewDecoder(r.Body).Decode(&data)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 
-	mutex.Lock()
-	stateStore[state.AgentID] = state
-	mutex.Unlock()
+	// Microsecond high-throughput processing logs
+	fmt.Printf("[TELEMETRY] Step: %d | Agent: %d | Energy: %.2f | Strategy: %s | Pos: (%.2f, %.2f)\n",
+		data.Step, data.AgentID, data.Energy, data.Strategy, data.XPosition, data.YPosition)
 
-	fmt.Printf("[GO SERVER] Updated Agent %d State (Bias Level: %.2f)\n", state.AgentID, state.Cognitive)
 	w.WriteHeader(http.StatusOK)
-}
-
-// getState allows visualization tools or monitoring dashboards to fetch current environment state
-func getState(w http.ResponseWriter, r *http.Request) {
-	mutex.Lock()
-	defer mutex.Unlock()
-
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(stateStore)
+	w.Write([]byte(`{"status": "received"}`))
 }
 
 func main() {
-	http.HandleFunc("/update", updateState)
-	http.HandleFunc("/state", getState)
-
-	fmt.Println("🚀 Go Agent Gateway running on port 8080...")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	http.HandleFunc("/telemetry", telemetryHandler)
+	port := ":8080"
+	fmt.Printf("[+] Go Telemetry Gateway listening on http://localhost%s...\n", port)
+	log.Fatal(http.ListenAndServe(port, nil))
 }
-
