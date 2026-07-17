@@ -3,3 +3,4 @@ numpy
 gymnasium
 pybind11
 requests
+plotly
