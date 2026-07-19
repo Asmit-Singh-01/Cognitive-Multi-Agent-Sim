@@ -53,7 +53,7 @@ y_data = np.random.randint(0, 100, num_agents)
 z_data = np.random.uniform(-1.2, -0.2, num_agents) 
 
 with col_graph:
-    st.write(### `Visualization Area`)
+    st.markdown("### Visualization Area")
     fig = go.Figure()
 
     # 2. MULTIPLE GRAPH STYLES LOGIC
@@ -61,7 +61,7 @@ with col_graph:
         fig.add_trace(go.Scatter(
             x=x_data, y=y_data, 
             mode='markers',
-            marker=dict(size=10, color=z_data, colorscale='Viridis', showscale=True, title="Energy")
+            marker=dict(size=10, color=z_data, colorscale='Viridis', showscale=True, colorbar=dict(title="Energy"))
         ))
         fig.update_layout(margin=dict(l=10, r=10, t=10, b=10), height=350, template="plotly_dark")
 
@@ -94,7 +94,7 @@ with col_graph:
     st.plotly_chart(fig, use_container_width=True)
 
 with col_metrics:
-    st.write(### `Live Telemetry`)
+    st.markdown("### Live Telemetry")
     st.metric("Active Live Agents", f"{num_agents} / 50")
     st.metric("Engine Current Step", f"{st.session_state.current_step} / 200")
     
@@ -109,3 +109,4 @@ if st.session_state.sim_running and st.session_state.current_step < 200:
     time.sleep(0.5)  # Controlling fluid updates
     st.session_state.current_step += 5  # Incrementing steps
     st.rerun()
+    
