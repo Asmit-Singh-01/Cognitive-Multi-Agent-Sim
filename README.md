@@ -1,4 +1,4 @@
-# 🧠 Cognitive-Multi-Agent-Sim
+# 🧠 Cognitive-Multi-Agent-Sim.
 
 ![Status](https://img.shields.io/badge/Status-Active_Development-brightgreen?style=flat-square)
 ![Tech](https://img.shields.io/badge/Tech-Python_%7C_PyTorch_%7C_Gymnasium-blue?style=flat-square)
