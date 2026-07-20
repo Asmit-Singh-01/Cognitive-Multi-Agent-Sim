@@ -3,20 +3,20 @@ import plotly.graph_objects as go
 import numpy as np
 import time
 
-# Page configuration
-st.set_page_config(layout="wide", page_title="Cognitive Sim v2")
+# Page setup
+st.set_page_config(layout="wide", page_title="Cognitive Multi-Agent Control Center")
 
-# 1. SESSION STATE INITIALIZATION (For Start, Stop, Resume tracking)
+# 1. SESSION STATE INITIALIZATION
 if 'current_step' not in st.session_state:
-    st.session_state.current_step = 20  # Starting from your sample step
+    st.session_state.current_step = 0
 if 'sim_running' not in st.session_state:
     st.session_state.sim_running = False
 
 st.title("🧠 Cognitive Multi-Agent Control Center")
 
-# --- SIDEBAR / CONTROLS SECTION ---
-st.subheader("🎛️ Simulation Controls")
-col_ctrl1, col_ctrl2, col_ctrl3, col_style = st.columns([15, 15, 15, 55])
+# 2. CONTROLS SECTION
+st.subheader("🎮 Simulation Controls")
+col_ctrl1, col_ctrl2, col_ctrl3, col_styles = st.columns([15, 15, 15, 55])
 
 with col_ctrl1:
     if st.button("▶️ Start / Resume", use_container_width=True):
@@ -32,81 +32,119 @@ with col_ctrl3:
         st.session_state.sim_running = False
         st.rerun()
 
-with col_style:
-    # Multiple Graph Styles Dropdown
+with col_styles:
     graph_style = st.selectbox(
-        "📊 Choose Visualization Style:",
+        "Choose Visualization Style:",
         ["2D Interactive Grid", "3D Cognitive Space (Scatter3D)", "3D Energy Terrain (Mesh/Surface)"]
     )
 
 st.markdown("---")
 
-# --- MAIN LAYOUT ---
-col_graph, col_metrics = st.columns([70, 30])
-
-# Dummy data generator based on steps (Replace this with your C++/Go backend data fetch)
-np.random.seed(42)
+# 3. DYNAMIC MULTI-AGENT STATE GENERATION
 num_agents = 50
-x_data = np.random.randint(0, 100, num_agents)
-y_data = np.random.randint(0, 100, num_agents)
-# Z-axis representing Energy Levels for 3D view
-z_data = np.random.uniform(-1.2, -0.2, num_agents) 
+step = st.session_state.current_step
 
-with col_graph:
-    st.markdown("### Visualization Area")
-    fig = go.Figure()
+# Base positions
+np.random.seed(42)
+base_x = np.random.uniform(10, 90, num_agents)
+base_y = np.random.uniform(10, 90, num_agents)
 
-    # 2. MULTIPLE GRAPH STYLES LOGIC
-    if graph_style == "2D Interactive Grid":
-        fig.add_trace(go.Scatter(
-            x=x_data, y=y_data, 
-            mode='markers',
-            marker=dict(size=10, color=z_data, colorscale='Viridis', showscale=True, colorbar=dict(title="Energy"))
-        ))
-        fig.update_layout(margin=dict(l=10, r=10, t=10, b=10), height=350, template="plotly_dark")
+# Dynamic trajectory & continuous state evolution per step
+time_factor = step / 15.0
+x_data = np.clip(base_x + 12 * np.sin(time_factor + np.arange(num_agents)), 0, 100)
+y_data = np.clip(base_y + 12 * np.cos(time_factor * 0.8 + np.arange(num_agents)), 0, 100)
 
-    elif graph_style == "3D Cognitive Space (Scatter3D)":
-        # 3D Scatter Plot for Agents
-        fig.add_trace(go.Scatter3d(
-            x=x_data, y=y_data, z=z_data,
-            mode='markers',
-            marker=dict(size=6, color=z_data, colorscale='Cividis', opacity=0.8)
-        ))
-        fig.update_layout(
-            margin=dict(l=0, r=0, t=0, b=0), 
-            height=350, 
-            template="plotly_dark",
-            scene=dict(
-                xaxis_title='X Path',
-                yaxis_title='Y Path',
-                zaxis_title='Energy Friction'
-            )
+# Energy levels dynamically evolving over steps (-1.0 to +0.5 range)
+energy_data = np.sin(time_factor + (x_data + y_data) / 25.0) * 0.7 - 0.25
+energy_data = np.clip(energy_data, -1.0, 0.5)
+
+# 4. VISUALIZATION AREA
+st.subheader("Visualization Area")
+fig = go.Figure()
+
+if graph_style == "2D Interactive Grid":
+    fig.add_trace(go.Scatter(
+        x=x_data,
+        y=y_data,
+        mode='markers',
+        marker=dict(
+            size=12,
+            color=energy_data,
+            colorscale='Viridis',
+            colorbar=dict(title="Energy"),
+            cmin=-1.0,
+            cmax=0.5,
+            showscale=True
         )
+    ))
+    fig.update_layout(
+        xaxis=dict(range=[0, 100], title="X Position"),
+        yaxis=dict(range=[0, 100], title="Y Position"),
+        margin=dict(l=20, r=20, t=30, b=20),
+        height=500
+    )
 
-    elif graph_style == "3D Energy Terrain (Mesh/Surface)":
-        # 3D Mesh/Surface plot to show system density
-        fig.add_trace(go.Mesh3d(
-            x=x_data, y=y_data, z=z_data,
-            opacity=0.6, colorscale='Hot'
-        ))
-        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=350, template="plotly_dark")
+elif graph_style == "3D Cognitive Space (Scatter3D)":
+    fig.add_trace(go.Scatter3d(
+        x=x_data,
+        y=y_data,
+        z=energy_data,
+        mode='markers',
+        marker=dict(
+            size=6,
+            color=energy_data,
+            colorscale='Cividis',
+            colorbar=dict(title="Energy Level"),
+            cmin=-1.0,
+            cmax=0.5
+        )
+    ))
+    fig.update_layout(
+        scene=dict(
+            xaxis_title='X Position',
+            yaxis_title='Y Position',
+            zaxis_title='Energy Friction'
+        ),
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=500
+    )
 
-    st.plotly_chart(fig, use_container_width=True)
-
-with col_metrics:
-    st.markdown("### Live Telemetry")
-    st.metric("Active Live Agents", f"{num_agents} / 50")
-    st.metric("Engine Current Step", f"{st.session_state.current_step} / 200")
+elif graph_style == "3D Energy Terrain (Mesh/Surface)":
+    grid_x, grid_y = np.meshgrid(np.linspace(0, 100, 30), np.linspace(0, 100, 30))
+    grid_z = np.sin(grid_x / 15.0 + time_factor) * np.cos(grid_y / 15.0 + time_factor) * 0.5
     
-    # Simple status indicator
-    if st.session_state.sim_running:
-        st.success("🟢 Simulation Running...")
-    else:
-        st.warning("⏸️ Simulation Paused")
+    fig.add_trace(go.Surface(
+        x=grid_x,
+        y=grid_y,
+        z=grid_z,
+        colorscale='Hot',
+        colorbar=dict(title="Energy Density")
+    ))
+    fig.update_layout(
+        scene=dict(
+            xaxis_title='X Grid',
+            yaxis_title='Y Grid',
+            zaxis_title='Energy Surface'
+        ),
+        margin=dict(l=0, r=0, t=0, b=0),
+        height=500
+    )
 
-# 3. STATEFUL LOOP (Resumes exactly where it stopped)
+st.plotly_chart(fig, use_container_width=True)
+
+# 5. LIVE TELEMETRY
+st.subheader("Live Telemetry")
+col_tel1, col_tel2 = st.columns(2)
+col_tel1.metric("Active Live Agents", f"{num_agents} / 50")
+col_tel2.metric("Engine Current Step", f"{st.session_state.current_step} / 200")
+
 if st.session_state.sim_running and st.session_state.current_step < 200:
-    time.sleep(0.5)  # Controlling fluid updates
-    st.session_state.current_step += 5  # Incrementing steps
+    st.success("🟢 Simulation Running...")
+    time.sleep(0.08)
+    st.session_state.current_step += 1
     st.rerun()
+elif st.session_state.current_step >= 200:
+    st.warning("⏸️ Simulation Completed (200/200 Steps)")
+else:
+    st.warning("⏸️ Simulation Paused")
     
