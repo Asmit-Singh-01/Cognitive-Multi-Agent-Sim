@@ -1,11 +1,17 @@
-# 🧠 Cognitive-Multi-Agent-Sim.
+<div align="center">
 
-![Status](https://img.shields.io/badge/Status-Active_Development-brightgreen?style=flat-square)
-![Tech](https://img.shields.io/badge/Tech-Python_%7C_PyTorch_%7C_Gymnasium-blue?style=flat-square)
-![Backend](https://img.shields.io/badge/Engine-C%2B%2B_%7C_Go%2F%20Golang-orange?style=flat-square)
-![CI/CD](https://img.shields.io/badge/Build-Passing-green?style=flat-square)
+# 🧠 Cognitive-Multi-Agent-Sim
 
-Welcome to **Cognitive-Multi-Agent-Sim**! 🚀
+[![Status](https://img.shields.io/badge/Status-Active_Development-brightgreen?style=for-the-badge)](#)
+[![Tech](https://img.shields.io/badge/Tech-Python_%7C_PyTorch_%7C_Gymnasium-blue?style=for-the-badge&logo=python)](#)
+[![Engine](https://img.shields.io/badge/Engine-C%2B%2B_%7C_Go%2F_Golang-orange?style=for-the-badge&logo=cplusplus)](#)
+[![Build](https://img.shields.io/badge/Build-Passing-green?style=for-the-badge&logo=github-actions)](#)
+
+*A production-grade, hybrid simulation framework analyzing the limits of Deep RL in modeling human cognitive complexity.*
+
+</div>
+
+---
 
 ## 🎯 About The Project
 This project is a custom-built, dynamic simulation environment where multiple AI entities (agents) learn to coordinate, plan complex tasks, and survive—**entirely without human instruction.** 
@@ -32,59 +38,9 @@ This repository implements a highly optimized, production-grade hybrid ecosystem
 - **C++ Engine** ⚙️ (High-performance environment compilation linked via `pybind11` for maximum execution speed)
 - **Go / Golang Gateway** 🐹 (Asynchronous, high-throughput network service for streaming and logging real-time agent telemetry)
 
-## 📊 Live Telemetry & Simulation Dashboards:
+---
 
-Below are the visual telemetry dashboard tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction duration during execution spikes:
-
-<div align="center">
-
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <img src="assets/Mount1.jpg" width="100%" alt="Mount 1"/><br/>
-      <b>Mount 1 Trajectory</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/mount2.jpg" width="100%" alt="Mount 2"/><br/>
-      <b>Mount 2 Analysis</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/mount3.jpg" width="100%" alt="Mount 3"/><br/>
-      <b>Mount 3 Dynamics</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="assets/3D1.jpg" width="100%" alt="3D Plot 1"/><br/>
-      <b>3D Space Exploration</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/3D2.jpg" width="100%" alt="3D Plot 2"/><br/>
-      <b>3D Energy Surface</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/3D3.jpg" width="100%" alt="3D Plot 3"/><br/>
-      <b>3D State Trajectory</b>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="assets/Graph1.jpg" width="100%" alt="Graph 1"/><br/>
-      <b>Cognitive Latency</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/Graph2.jpg" width="100%" alt="Graph 2"/><br/>
-      <b>Memory Overhead</b>
-    </td>
-    <td align="center" width="33%">
-      <img src="assets/Graph3.jpg" width="100%" alt="Graph 3"/><br/>
-      <b>Policy Entropy</b>
-    </td>
-  </tr>
-</table>
-
-</div>
-
+## 📊 Live Telemetry & Simulation Dashboards
 
 Below are the visual telemetry dashboards tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction during execution spikes:
 
@@ -170,6 +126,7 @@ Below are the visual telemetry dashboards tracking non-stationary decision traje
 
 </div>
 
+---
 
 ## 🚧 Current Status
 * **Hybrid Core:** Completed! The Python training architecture, C++ physics layer, and Go telemetry gateway are fully integrated.
