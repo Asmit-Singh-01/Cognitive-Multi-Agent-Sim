@@ -45,11 +45,11 @@ Below are the visual telemetry dashboard tracking non-stationary decision trajec
       <b>Mount 1 Trajectory</b>
     </td>
     <td align="center" width="33%">
-      <img src="assets/Mount2.jpg" width="100%" alt="Mount 2"/><br/>
+      <img src="assets/mount2.jpg" width="100%" alt="Mount 2"/><br/>
       <b>Mount 2 Analysis</b>
     </td>
     <td align="center" width="33%">
-      <img src="assets/Mount3.jpg" width="100%" alt="Mount 3"/><br/>
+      <img src="assets/mount3.jpg" width="100%" alt="Mount 3"/><br/>
       <b>Mount 3 Dynamics</b>
     </td>
   </tr>
