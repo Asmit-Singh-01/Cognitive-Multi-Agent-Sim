@@ -86,27 +86,90 @@ Below are the visual telemetry dashboard tracking non-stationary decision trajec
 </div>
 
 
-Below is the visual telemetry dashboard tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction during execution spikes:
+Below are the visual telemetry dashboards tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction during execution spikes:
 
-<p align="center">
-  <img src="assets/1_state_space_exploration.png" width="45%" alt="State Space Matrix" />
-  <img src="assets/2_cognitive_friction_latency.png" width="45%" alt="Cognitive Friction" />
-</p>
+<div align="center">
 
-<p align="center">
-  <img src="assets/3_strategy_drift.png" width="45%" alt="Strategy Drift" />
-  <img src="assets/4_strategy_phase_portrait.png" width="45%" alt="Phase Portrait" />
-</p>
+### 🟢 3D Surface & Topography Exploration
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/Mount1.jpg" width="100%" alt="Mount 1"/><br/>
+      <b>Mount 1 Trajectory</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/mount2.jpg" width="100%" alt="Mount 2"/><br/>
+      <b>Mount 2 Analysis</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/mount3.jpg" width="100%" alt="Mount 3"/><br/>
+      <b>Mount 3 Dynamics</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/3D1.jpg" width="100%" alt="3D Plot 1"/><br/>
+      <b>3D Space Exploration</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/3D2.jpg" width="100%" alt="3D Plot 2"/><br/>
+      <b>3D Energy Surface</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/3D3.jpg" width="100%" alt="3D Plot 3"/><br/>
+      <b>3D State Trajectory</b>
+    </td>
+  </tr>
+</table>
 
-<p align="center">
-  <img src="assets/5_memory_overhead.png" width="45%" alt="Memory Matrix" />
-  <img src="assets/6_pareto_frontier.png" width="45%" alt="Pareto Frontier" />
-</p>
+### 📈 Cognitive Dynamics & Execution Metrics
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/1_state_space_exploration.png" width="100%" alt="State Space"/><br/>
+      <b>High-Fidelity State Space Matrix</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/2_cognitive_friction_latency.png" width="100%" alt="Cognitive Friction"/><br/>
+      <b>Cognitive Friction vs Stream Latency</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/3_strategy_drift.png" width="100%" alt="Strategy Drift"/><br/>
+      <b>Non-Stationarity Strategy Drift Matrix</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/4_strategy_phase_portrait.png" width="100%" alt="Convergence Phase"/><br/>
+      <b>Strategy Convergence Phase Portrait</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/5_memory_overhead.png" width="100%" alt="Memory Overhead"/><br/>
+      <b>Dynamic System Memory Overhead</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/6_pareto_frontier.png" width="100%" alt="Pareto Frontier"/><br/>
+      <b>Pareto Efficiency Optimization Frontier</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%">
+      <img src="assets/7_telemetry_packet_loss.png" width="100%" alt="Telemetry Packet Loss"/><br/>
+      <b>Telemetry Channel Packet Loss</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="assets/8_policy_entropy_decay.png" width="100%" alt="Policy Entropy Decay"/><br/>
+      <b>Neural Policy Entropy Decay</b>
+    </td>
+  </tr>
+</table>
 
-<p align="center">
-  <img src="assets/7_telemetry_packet_loss.png" width="45%" alt="Packet Loss Analysis" />
-  <img src="assets/8_policy_entropy_decay.png" width="45%" alt="Neural Policy Entropy" />
-</p>
+</div>
+
 
 ## 🚧 Current Status
 * **Hybrid Core:** Completed! The Python training architecture, C++ physics layer, and Go telemetry gateway are fully integrated.
