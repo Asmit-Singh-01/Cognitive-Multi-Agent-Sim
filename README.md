@@ -32,7 +32,60 @@ This repository implements a highly optimized, production-grade hybrid ecosystem
 - **C++ Engine** ⚙️ (High-performance environment compilation linked via `pybind11` for maximum execution speed)
 - **Go / Golang Gateway** 🐹 (Asynchronous, high-throughput network service for streaming and logging real-time agent telemetry)
 
-## 📊 Live Telemetry & Simulation Dashboards
+## 📊 Live Telemetry & Simulation Dashboards:
+
+Below are the visual telemetry dashboard tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction duration during execution spikes:
+
+<div align="center">
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="assets/Mount1.jpg" width="100%" alt="Mount 1"/><br/>
+      <b>Mount 1 Trajectory</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/Mount2.jpg" width="100%" alt="Mount 2"/><br/>
+      <b>Mount 2 Analysis</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/Mount3.jpg" width="100%" alt="Mount 3"/><br/>
+      <b>Mount 3 Dynamics</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <img src="assets/3D1.jpg" width="100%" alt="3D Plot 1"/><br/>
+      <b>3D Space Exploration</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/3D2.jpg" width="100%" alt="3D Plot 2"/><br/>
+      <b>3D Energy Surface</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/3D3.jpg" width="100%" alt="3D Plot 3"/><br/>
+      <b>3D State Trajectory</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <img src="assets/Graph1.jpg" width="100%" alt="Graph 1"/><br/>
+      <b>Cognitive Latency</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/Graph2.jpg" width="100%" alt="Graph 2"/><br/>
+      <b>Memory Overhead</b>
+    </td>
+    <td align="center" width="33%">
+      <img src="assets/Graph3.jpg" width="100%" alt="Graph 3"/><br/>
+      <b>Policy Entropy</b>
+    </td>
+  </tr>
+</table>
+
+</div>
+
+
 Below is the visual telemetry dashboard tracking non-stationary decision trajectories, phase portraits, system memory overhead, and cognitive friction during execution spikes:
 
 <p align="center">
