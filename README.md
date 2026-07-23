@@ -134,6 +134,134 @@ Below are the visual telemetry dashboards tracking non-stationary decision traje
 
 ---
 
+## 🔧 Build Troubleshooting
+
+The C++ backend is built using **pybind11**. If you encounter build errors, check that your compiler and dependencies are installed correctly.
+
+### Compiler Requirements
+
+| Platform | Compiler |
+|----------|----------|
+| Linux | GCC (g++) |
+| macOS | Apple Clang |
+| Windows | Microsoft Visual Studio Build Tools (MSVC) |
+
+Install all required Python dependencies before building:
+
+```bash
+make init
+```
+
+This installs the required packages, including:
+
+- torch
+- numpy
+- gymnasium
+- pybind11
+- requests
+
+---
+
+### Building the C++ Backend
+
+Compile the backend using:
+
+```bash
+make build-backend
+```
+
+This runs:
+
+```bash
+python setup.py build_ext --inplace
+```
+
+The command compiles `bindings.cpp` into the `physics_core` Python extension, allowing it to be imported directly by the simulator.
+
+---
+
+### Common Build Issues
+
+#### `ModuleNotFoundError: No module named 'pybind11'`
+
+Install the missing dependency:
+
+```bash
+pip install pybind11
+```
+
+or simply run:
+
+```bash
+make init
+```
+
+---
+
+#### `fatal error: pybind11/pybind11.h: No such file or directory`
+
+Ensure `pybind11` is installed in your current Python environment:
+
+```bash
+pip install pybind11
+```
+
+---
+
+#### `Python.h: No such file or directory`
+
+On Ubuntu/Debian, install the Python development headers:
+
+```bash
+sudo apt install python3-dev
+```
+
+Then rebuild:
+
+```bash
+make build-backend
+```
+
+---
+
+#### Compiler not found
+
+**Linux**
+
+```bash
+sudo apt install build-essential
+```
+
+**macOS**
+
+```bash
+xcode-select --install
+```
+
+**Windows**
+
+Install **Visual Studio Build Tools** with:
+
+- MSVC C++ Compiler
+- Windows SDK
+
+Restart your terminal after installation and rebuild the project.
+
+---
+
+### Cleaning Previous Builds
+
+If the build fails after changing dependencies or source files, clean previous build artifacts and rebuild:
+
+```bash
+make clean
+make build-backend
+```
+
+This removes compiled binaries and build files before performing a fresh build.
+
+---
+
 ### 🤝 Support & Follow
 Are you fascinated by Artificial General Intelligence (AGI), Multi-Agent Systems, or the limitations of Deep RL in modeling cognitive behavior? 
 
